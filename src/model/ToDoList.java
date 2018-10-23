@@ -1,14 +1,14 @@
 package model;
 
-public class List {
+public class ToDoList {
 	private String listName = null;
 	private String status = null;
 	
 	// default constructor
-	public List(){}
+	public ToDoList(){}
 	
 	// constructor
-	public List(String name, String created){
+	public ToDoList(String name, String created){
 		this.listName = name;
 		this.status = created;
 	}

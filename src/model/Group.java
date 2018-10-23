@@ -30,7 +30,6 @@ public class Group {
 		return this.colorIndicator;
 	}
 	
-	// Should this exist in this class?
 	public void setPriority(int pri){
 		this.priority = pri;
 	}
