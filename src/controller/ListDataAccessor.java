@@ -120,10 +120,5 @@ private Connection connection;
 		}
 	}
 	
-	public void displayFilteredStatus(List<ToDoList> filteredList){
-		for (int i = 0; i < filteredList.size(); i++){
-			System.out.println(filteredList.get(i).getListStatus());
-		}
-	}
 	
 }
