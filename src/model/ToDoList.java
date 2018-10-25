@@ -1,8 +1,8 @@
 package model;
 
 public class ToDoList {
-	private String listName = null;
-	private String status = null;
+	private String listName;
+	private String status;
 	
 	// default constructor
 	public ToDoList(){}
@@ -25,6 +25,10 @@ public class ToDoList {
 		if (!listStatus)
 			this.status = "Complete";
 		this.status = "Active";
+	}
+	
+	public String getListStatus() {
+		return this.status;
 	}
 	
 	
