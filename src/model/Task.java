@@ -7,14 +7,14 @@ public class Task {
 	private Date taskCreateDate;
 	private Date taskDueDate;
 	private String summary;
-	private String group ; // how do you deal with foreign keys? Inherit a group class?
+	private int group ; // how do you deal with foreign keys? Inherit a group class?
 	private Date reminder;
 	private int priority; // another foreign key
 	private boolean status;
 	
 	public Task(){}
 	
-	public Task(String name, Date create, Date due, String sum, String grp, Date remind, int pri, boolean stat){
+	public Task(String name, Date create, Date due, String sum, int grp, Date remind, int pri, boolean stat){
 		this.taskName = name;
 		this.taskCreateDate = create;
 		this.taskDueDate = due;
@@ -58,11 +58,11 @@ public class Task {
 		return this.summary;
 	}
 	
-	public void setGroup(String grp){
+	public void setGroup(int grp){
 		this.group = grp;
 	}
 	
-	public String getGroup(){
+	public int getGroup(){
 		return this.group;
 	}
 	

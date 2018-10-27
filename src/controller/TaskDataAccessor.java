@@ -36,7 +36,7 @@ public class TaskDataAccessor {
 				Date taskCreate = rs.getDate("TaskCreateDate");
 				Date taskDue = rs.getDate("TaskDueDate");
 				String summary = rs.getString("Summary");
-				String group = rs.getString("Group");
+				int group = rs.getInt("Group");
 				Date reminder = rs.getDate("Reminder");
 				int priority = rs.getInt("Priority");
 				boolean status = rs.getBoolean("Status");
@@ -48,7 +48,7 @@ public class TaskDataAccessor {
 	}
 	
 	// add Task
-	public void addTask(String name, Date create, Date due, String sum, String grp, Date remind, int pri, boolean stat) throws SQLException{
+	public void addTask(String name, Date create, Date due, String sum, int grp, Date remind, int pri, boolean stat) throws SQLException{
 		Task newTask = new Task();
 		
 		Statement stmnt = connection.createStatement();
@@ -61,6 +61,25 @@ public class TaskDataAccessor {
 	}
 	
 	// delete Task
+	public void deleteTask(String name) throws SQLException{
+		// get Id of named list
+		int id = -1;
+		
+		Statement stmnt = connection.createStatement();
+		ResultSet rs = stmnt.executeQuery("SELECT Id FROM Task WHERE TaskName = '" + name + "'");
+		// Need to add in error handling for when the Id doesn't exist
+		while(rs.next()){
+			System.out.println("Id of " + name + " is " + rs.getInt("Id"));
+			id = rs.getInt("Id");
+		}
+		int deleteSuccessful = stmnt.executeUpdate("DELETE FROM Task WHERE Id = " + id);
+		
+		// check if delete was successful
+		if (deleteSuccessful > -1)
+			System.out.println("Delete was successful");
+		else 
+			System.out.println("Delete failed");
+	}
 	
 	// filter by TaskName
 	
