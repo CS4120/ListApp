@@ -82,8 +82,11 @@ public class Task {
 		return this.priority;
 	}
 	
-	public void setStatus(boolean stat){
-		this.status = stat;
+	public void setStatus(int stat){
+            this.status = true;
+            if (stat == 0){
+                this.status = false;
+            }
 	}
 	
 	public boolean getStatus(){

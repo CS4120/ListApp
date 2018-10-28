@@ -1,0 +1,40 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 27, 2018, 6:12:59 PM
+    Author     : Sarah
+*/
+
+/*  color theme?
+#011A27 - dark navy
+#063852 - blueberry
+#f0810f - tangerine
+#e6df44 - daffodil
+*/
+
+#titleLbl{
+     -fx-text-fill: #011A27;
+}
+
+.jfx-button {
+    -jfx-button-type: FLAT;
+    -fx-background-color: #063852;
+    -fx-text-fill: white;
+}
+
+#addTaskButton {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #F0810F;
+    -fx-text-fill: white;
+    -fx-background-radius: 60px;
+    -fx-pref-height: 60px;
+    -fx-pref-width: 60px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="824.0" prefWidth="1291.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todoapp.MainViewController">
+   <children>
+      <Label id="titleLbl" fx:id="titleLbl" layoutX="414.0" layoutY="1.0" prefHeight="122.0" prefWidth="321.0" stylesheets="@../listAppStyleSheet.css" text="My List">
+         <font>
+            <Font name="MS UI Gothic" size="96.0" />
+         </font>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </Label>
+      <VBox fx:id="leftPaneVBox" layoutY="157.0" prefHeight="663.0" prefWidth="359.0">
+         <children>
+            <Label fx:id="todayLbl" text="Today">
+               <font>
+                  <Font name="Microsoft YaHei UI" size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="weekLbl" text="Week">
+               <font>
+                  <Font name="Microsoft YaHei UI" size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="monthLbl" text="Month">
+               <font>
+                  <Font name="Microsoft YaHei UI" size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="recurringLbl" text="Recurring">
+               <font>
+                  <Font name="Microsoft YaHei UI" size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="completedLbl" text="Completed">
+               <font>
+                  <Font name="Microsoft YaHei UI" size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+            </Label>
+            <JFXComboBox id="groupComboBox" fx:id="groupComboBox" promptText="All Groups ">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </JFXComboBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+      </VBox>
+      <VBox fx:id="centerPaneVBox" layoutX="377.0" layoutY="157.0" prefHeight="663.0" prefWidth="509.0">
+         <opaqueInsets>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <HBox fx:id="centerPaneHBox" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXComboBox id="sortComboBox" fx:id="sortComboBox" promptText="Sort by" stylesheets="@../listAppStyleSheet.css">
+                     <HBox.margin>
+                        <Insets bottom="20.0" left="10.0" right="20.0" top="30.0" />
+                     </HBox.margin>
+                  </JFXComboBox>
+               </children>
+            </HBox>
+            <VBox id="taskListVBox" fx:id="taskListVBox" prefHeight="471.0" prefWidth="469.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="35.0" />
+               </VBox.margin></VBox>
+         </children>
+      </VBox>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="735.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/CheckMarkLogoTransparent.png" />
+         </image>
+      </ImageView>
+      <VBox fx:id="rightPaneVBox" layoutX="903.0" layoutY="149.0" prefHeight="663.0" prefWidth="359.0">
+         <opaqueInsets>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <JFXTextArea fx:id="taskTextArea" prefHeight="604.0" prefWidth="319.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </JFXTextArea>
+         </children>
+      </VBox>
+      <JFXButton id="addTaskButton" fx:id="addTaskButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1193.0" layoutY="37.0" maxHeight="59.0" maxWidth="62.0" prefHeight="59.0" prefWidth="62.0" ripplerFill="BLACK" stylesheets="@../listAppStyleSheet.css" text="+" textAlignment="CENTER">
+         <font>
+            <Font name="Microsoft YaHei UI Bold" size="24.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

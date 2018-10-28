@@ -36,7 +36,7 @@ public class TaskDataAccessor {
 				Date taskCreate = rs.getDate("TaskCreateDate");
 				Date taskDue = rs.getDate("TaskDueDate");
 				String summary = rs.getString("Summary");
-				String group = rs.getString("Group");
+				String group = rs.getString("Category");
 				Date reminder = rs.getDate("Reminder");
 				int priority = rs.getInt("Priority");
 				boolean status = rs.getBoolean("Status");
@@ -47,6 +47,7 @@ public class TaskDataAccessor {
 		}
 	}
 	
+<<<<<<< Updated upstream
 	// add Task
 	public void addTask(String name, Date create, Date due, String sum, String grp, Date remind, int pri, boolean stat) throws SQLException{
 		Task newTask = new Task();
@@ -76,4 +77,16 @@ public class TaskDataAccessor {
 	
 	// display filtered
 	
+=======
+	// add other methods like add task, delete task, update task, etc.
+        
+        public void updateStatus(Task task){
+            
+            
+        }
+        
+
+        
+        
+>>>>>>> Stashed changes
 }

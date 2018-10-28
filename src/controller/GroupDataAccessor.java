@@ -41,4 +41,18 @@ private Connection connection;
 	}
 	
 	// add other methods like add task, delete task, update task, etc.
+        public String getGroupColor(int groupID)throws SQLException {
+		try (
+				Statement stmnt = connection.createStatement();
+				ResultSet rs = stmnt.executeQuery("select ColorIndicator from Category where Id = " + groupID);
+		){
+			String colorIndicator = new String();
+			while (rs.next()) {
+				colorIndicator = rs.getString("ColorIndicator");
+			}
+			return colorIndicator;
+		}
+	}
+            
 }
+
