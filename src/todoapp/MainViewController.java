@@ -5,21 +5,31 @@
  */
 package todoapp;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextArea;
 import controller.TaskDataAccessor;
 import controller.GroupDataAccessor;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import model.Task;
 
 public class MainViewController implements Initializable {
@@ -33,6 +43,9 @@ public class MainViewController implements Initializable {
     
     @FXML
     private VBox taskListVBox;
+    
+    @FXML
+    private JFXButton addTaskButton;
     
     @FXML
     private JFXComboBox sortComboBox;
@@ -54,6 +67,28 @@ public class MainViewController implements Initializable {
     
     @FXML
     private Label completedLbl;
+    @FXML
+    private Label titleLbl;
+    @FXML
+    private VBox leftPaneVBox;
+    @FXML
+    private VBox centerPaneVBox;
+    @FXML
+    private HBox centerPaneHBox;
+    @FXML
+    private VBox rightPaneVBox;
+    @FXML
+    private JFXTextArea taskTextArea;
+    
+    @FXML
+    private void handleAddTaskBtnAction(ActionEvent event) throws IOException{
+        System.out.println("Add Task Button Clicked!");
+        Parent addTaskParent = FXMLLoader.load(getClass().getClassLoader().getResource("addTask/AddTask.fxml"));
+        Scene addTaskScene = new Scene(addTaskParent);
+        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        appStage.setScene(addTaskScene);
+        appStage.show();
+    }
     
     
     @Override 
@@ -136,4 +171,6 @@ public class MainViewController implements Initializable {
     }
     
     // write method to create list of tasks
+    
+    // event handler for clicking on the add button
 }

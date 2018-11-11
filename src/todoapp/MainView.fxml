@@ -118,7 +118,7 @@
             </JFXTextArea>
          </children>
       </VBox>
-      <JFXButton id="addTaskButton" fx:id="addTaskButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1193.0" layoutY="37.0" maxHeight="59.0" maxWidth="62.0" prefHeight="59.0" prefWidth="62.0" ripplerFill="BLACK" stylesheets="@../listAppStyleSheet.css" text="+" textAlignment="CENTER">
+      <JFXButton id="addTaskButton" fx:id="addTaskButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1193.0" layoutY="37.0" maxHeight="59.0" maxWidth="62.0" onAction="#handleAddTaskBtnAction" prefHeight="59.0" prefWidth="62.0" ripplerFill="BLACK" stylesheets="@../listAppStyleSheet.css" text="+" textAlignment="CENTER">
          <font>
             <Font name="Microsoft YaHei UI Bold" size="24.0" />
          </font>

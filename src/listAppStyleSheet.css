@@ -12,7 +12,7 @@
 }
 
 .jfx-button {
-    -jfx-button-type: FLAT;
+    -jfx-button-type: RAISED;
     -fx-background-color: #063852;
     -fx-text-fill: white;
 }
@@ -34,4 +34,6 @@
     -fx-text-fill: #011A27;
     -fx-font-size: 24px;
 }
+
+
 
