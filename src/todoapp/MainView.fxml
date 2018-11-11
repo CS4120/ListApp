@@ -10,7 +10,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="824.0" prefWidth="1291.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todoapp.MainViewController">
+<AnchorPane id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="824.0" prefWidth="1291.0" stylesheets="@../listAppStyleSheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todoapp.MainViewController">
    <children>
       <Label id="titleLbl" fx:id="titleLbl" layoutX="414.0" layoutY="1.0" prefHeight="122.0" prefWidth="321.0" stylesheets="@../listAppStyleSheet.css" text="My List">
          <font>
@@ -22,7 +22,7 @@
       </Label>
       <VBox fx:id="leftPaneVBox" layoutY="157.0" prefHeight="663.0" prefWidth="359.0">
          <children>
-            <Label fx:id="todayLbl" text="Today">
+            <Label id="todayLbl" fx:id="todayLbl" stylesheets="@../listAppStyleSheet.css" text="Today">
                <font>
                   <Font name="Microsoft YaHei UI" size="36.0" />
                </font>
@@ -30,7 +30,7 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="weekLbl" text="Week">
+            <Label id="weekLbl" fx:id="weekLbl" stylesheets="@../listAppStyleSheet.css" text="Week">
                <font>
                   <Font name="Microsoft YaHei UI" size="36.0" />
                </font>
@@ -38,7 +38,7 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="monthLbl" text="Month">
+            <Label id="monthLbl" fx:id="monthLbl" stylesheets="@../listAppStyleSheet.css" text="Month">
                <font>
                   <Font name="Microsoft YaHei UI" size="36.0" />
                </font>
@@ -46,7 +46,7 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="recurringLbl" text="Recurring">
+            <Label id="recurringLbl" fx:id="recurringLbl" stylesheets="@../listAppStyleSheet.css" text="Recurring">
                <font>
                   <Font name="Microsoft YaHei UI" size="36.0" />
                </font>
@@ -54,7 +54,7 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="completedLbl" text="Completed">
+            <Label id="completedLbl" fx:id="completedLbl" stylesheets="@../listAppStyleSheet.css" text="Completed">
                <font>
                   <Font name="Microsoft YaHei UI" size="36.0" />
                </font>
@@ -62,7 +62,7 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </Label>
-            <JFXComboBox id="groupComboBox" fx:id="groupComboBox" promptText="All Groups ">
+            <JFXComboBox id="groupComboBox" fx:id="groupComboBox" promptText="All Groups " stylesheets="@../listAppStyleSheet.css">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
@@ -87,12 +87,12 @@
                <children>
                   <JFXComboBox id="sortComboBox" fx:id="sortComboBox" promptText="Sort by" stylesheets="@../listAppStyleSheet.css">
                      <HBox.margin>
-                        <Insets bottom="20.0" left="10.0" right="20.0" top="30.0" />
+                        <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
                      </HBox.margin>
                   </JFXComboBox>
                </children>
             </HBox>
-            <VBox id="taskListVBox" fx:id="taskListVBox" prefHeight="471.0" prefWidth="469.0">
+            <VBox id="taskListVBox" fx:id="taskListVBox" prefHeight="471.0" prefWidth="469.0" spacing="15.0" stylesheets="@../listAppStyleSheet.css">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="35.0" />
                </VBox.margin></VBox>
@@ -103,7 +103,7 @@
             <Image url="@../images/CheckMarkLogoTransparent.png" />
          </image>
       </ImageView>
-      <VBox fx:id="rightPaneVBox" layoutX="903.0" layoutY="149.0" prefHeight="663.0" prefWidth="359.0">
+      <VBox fx:id="rightPaneVBox" layoutX="903.0" layoutY="149.0" prefHeight="663.0" prefWidth="359.0" spacing="10.0">
          <opaqueInsets>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </opaqueInsets>

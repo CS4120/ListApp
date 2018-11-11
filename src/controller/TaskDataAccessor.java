@@ -32,6 +32,7 @@ public class TaskDataAccessor {
 		){
 			List<Task> taskList = new ArrayList<>();
 			while (rs.next()) {
+                                int id = rs.getInt("Id");
 				String taskName = rs.getString("TaskName");
 				Date taskCreate = rs.getDate("TaskCreateDate");
 				Date taskDue = rs.getDate("TaskDueDate");
@@ -39,17 +40,17 @@ public class TaskDataAccessor {
 				String group = rs.getString("Category");
 				Date reminder = rs.getDate("Reminder");
 				int priority = rs.getInt("Priority");
-				boolean status = rs.getBoolean("Status");
-				Task task = new Task(taskName, taskCreate, taskDue, summary, group, reminder, priority, status);
+				int status = rs.getInt("Status");
+				Task task = new Task(id, taskName, taskCreate, taskDue, summary, group, reminder, priority, status);
 				taskList.add(task);
 			}
 			return taskList;
 		}
 	}
 	
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 	// add Task
-	public void addTask(String name, Date create, Date due, String sum, String grp, Date remind, int pri, boolean stat) throws SQLException{
+	public void addTask(String name, Date create, Date due, String sum, String grp, Date remind, int pri, int stat) throws SQLException{
 		Task newTask = new Task();
 		
 		Statement stmnt = connection.createStatement();
@@ -77,16 +78,17 @@ public class TaskDataAccessor {
 	
 	// display filtered
 	
-=======
+//=======
 	// add other methods like add task, delete task, update task, etc.
         
-        public void updateStatus(Task task){
+        public void updateStatus(Task task) throws SQLException{
             
-            
+            Statement stmnt = connection.createStatement();
+		int updateSuccessful = stmnt.executeUpdate("UPDATE Task set Status = " + (task.getStatus() == 1 ? "0" : "1") + " where Id = " + task.getId());           
         }
         
 
         
         
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 }

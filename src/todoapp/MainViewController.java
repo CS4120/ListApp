@@ -6,36 +6,26 @@
 package todoapp;
 
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 import controller.TaskDataAccessor;
 import controller.GroupDataAccessor;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import model.Group;
 import model.Task;
 
-
-
-
-/**
- * FXML Controller class
- *
- * @author Sarah
- */
 public class MainViewController implements Initializable {
 
     private List<Task> listOfTasks;
-//    private List<JFXCheckBox> taskCheckBoxList = new ArrayList<>();
+    private List<Task> cbList;
     private String categoryColor;
     private GroupDataAccessor gda;
     private Color c;
@@ -43,6 +33,28 @@ public class MainViewController implements Initializable {
     
     @FXML
     private VBox taskListVBox;
+    
+    @FXML
+    private JFXComboBox sortComboBox;
+    
+    @FXML
+    private JFXComboBox groupComboBox;
+    
+    @FXML
+    private Label todayLbl;
+    
+    @FXML
+    private Label weekLbl;
+    
+    @FXML
+    private Label monthLbl;
+    
+    @FXML
+    private Label recurringLbl;
+    
+    @FXML
+    private Label completedLbl;
+    
     
     @Override 
     public void initialize(URL url, ResourceBundle rb) {
@@ -52,6 +64,7 @@ public class MainViewController implements Initializable {
             TaskDataAccessor tda = new TaskDataAccessor("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/ListApp", "root", "Purple00");
             listOfTasks = tda.getTaskList();
             
+            // clear all of the tasks in the VBox 
             taskListVBox.getChildren().clear();
             
             // iterate through taskList and create checkboxes
@@ -59,7 +72,7 @@ public class MainViewController implements Initializable {
                 final JFXCheckBox taskCheckBox = new JFXCheckBox(task.getName());
                 
                 // check if the task is completed in the database or not
-                if (task.getStatus() == false){
+                if (task.getStatus() == 0){
                     taskCheckBox.setSelected(false);
                 }
                 else{
@@ -75,15 +88,21 @@ public class MainViewController implements Initializable {
                 // set task text to category color
                 taskCheckBox.setTextFill(findColor(categoryColor));
                 
-                taskCheckBox.setOnAction(e ->
-                        tda.updateStatus(task)
-                );
+                // checkbox event
+                taskCheckBox.setOnAction(e -> {
+                    try {
+                        task.setStatus(task.getStatus() == 0 ? 1 : 0);
+                        tda.updateStatus(task);
+                    } 
+                    catch (SQLException ex) {
+                        Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+                    } 
+                    
+                    
+                });
                 taskListVBox.getChildren().add(taskCheckBox);
             }
             
-            // action on checkbox
-            
-            // 
             
         } catch (SQLException ex) {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,4 +134,6 @@ public class MainViewController implements Initializable {
             return Color.BLACK;
         }      
     }
+    
+    // write method to create list of tasks
 }
