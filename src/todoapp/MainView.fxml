@@ -90,6 +90,11 @@
                         <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
                      </HBox.margin>
                   </JFXComboBox>
+                  <JFXComboBox id="selectTaskcb" fx:id="selectTaskcb" promptText="Select a task" stylesheets="@../listAppStyleSheet.css">
+                     <HBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </HBox.margin>
+                  </JFXComboBox>
                </children>
             </HBox>
             <VBox id="taskListVBox" fx:id="taskListVBox" prefHeight="471.0" prefWidth="469.0" spacing="15.0" stylesheets="@../listAppStyleSheet.css">
@@ -98,7 +103,7 @@
                </VBox.margin></VBox>
          </children>
       </VBox>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="735.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="126.0" fitWidth="144.0" layoutX="735.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/CheckMarkLogoTransparent.png" />
          </image>
@@ -111,11 +116,16 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <JFXTextArea fx:id="taskTextArea" prefHeight="604.0" prefWidth="319.0">
+            <JFXTextArea fx:id="taskTextArea" prefHeight="550.0" prefWidth="299.0" stylesheets="@../listAppStyleSheet.css">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </JFXTextArea>
+            <JFXButton id="snoozeTaskBtn" fx:id="snoozeTaskBtn" alignment="CENTER" buttonType="RAISED" stylesheets="@../listAppStyleSheet.css" text="Snooze">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="125.0" top="10.0" />
+               </VBox.margin>
+            </JFXButton>
          </children>
       </VBox>
       <JFXButton id="addTaskButton" fx:id="addTaskButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1193.0" layoutY="37.0" maxHeight="59.0" maxWidth="62.0" onAction="#handleAddTaskBtnAction" prefHeight="59.0" prefWidth="62.0" ripplerFill="BLACK" stylesheets="@../listAppStyleSheet.css" text="+" textAlignment="CENTER">

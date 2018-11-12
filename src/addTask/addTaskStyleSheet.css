@@ -11,8 +11,14 @@
     -fx-font-size: 16px;
 }
 
+#addTaskTitlelbl {
+    -fx-text-fill: #011A27;
+    -fx-font-size: 36px;
+}
+
 .jfx-button {
     -jfx-button-type: RAISED;
     -fx-background-color: #063852;
     -fx-text-fill: white;
 }
+

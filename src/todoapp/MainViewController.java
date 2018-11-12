@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,28 +45,22 @@ public class MainViewController implements Initializable {
     
     @FXML
     private VBox taskListVBox;
-    
     @FXML
     private JFXButton addTaskButton;
-    
     @FXML
     private JFXComboBox sortComboBox;
-    
+    @FXML
+    private JFXComboBox selectTaskcb;
     @FXML
     private JFXComboBox groupComboBox;
-    
     @FXML
     private Label todayLbl;
-    
     @FXML
     private Label weekLbl;
-    
     @FXML
     private Label monthLbl;
-    
     @FXML
     private Label recurringLbl;
-    
     @FXML
     private Label completedLbl;
     @FXML
@@ -138,13 +134,16 @@ public class MainViewController implements Initializable {
                 taskListVBox.getChildren().add(taskCheckBox);
             }
             
-            
         } catch (SQLException ex) {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }       
+        }      
         
+        // add sortOptions to sort combo box
+        sortComboBox.getItems().addAll("Date", "Group", "Priority");
+        
+        // add tasks to selectTask combo box to view details in the right pane text area
     }    
     private Color findColor(String color){
         if (color.equalsIgnoreCase("BLUE")){
@@ -169,8 +168,5 @@ public class MainViewController implements Initializable {
             return Color.BLACK;
         }      
     }
-    
-    // write method to create list of tasks
-    
-    // event handler for clicking on the add button
+      
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
@@ -8,16 +9,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../listAppStyleSheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addTask.AddTaskController">
+<AnchorPane id="AnchorPane" prefHeight="486.0" prefWidth="611.0" stylesheets="@../listAppStyleSheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addTask.AddTaskController">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+      <AnchorPane layoutX="1.0" layoutY="63.0" prefHeight="419.0" prefWidth="610.0" stylesheets="@addTaskStyleSheet.css">
          <children>
-            <JFXButton id="submitBtn" fx:id="submitBtn" buttonType="RAISED" layoutX="534.0" layoutY="361.0" onAction="#handleSubmitBtnAction" stylesheets="@../listAppStyleSheet.css" text="Submit">
+            <JFXButton id="submitBtn" fx:id="submitBtn" buttonType="RAISED" layoutX="539.0" layoutY="384.0" onAction="#handleSubmitBtnAction" stylesheets="@../listAppStyleSheet.css" text="Submit">
                <font>
                   <Font name="Microsoft YaHei UI" size="12.0" />
                </font>
             </JFXButton>
-            <JFXButton id="cancelBtn" fx:id="cancelBtn" buttonType="RAISED" layoutX="14.0" layoutY="361.0" onAction="#handleCancelBtnAction" stylesheets="@../listAppStyleSheet.css" text="Cancel">
+            <JFXButton id="cancelBtn" fx:id="cancelBtn" buttonType="RAISED" layoutX="11.0" layoutY="384.0" onAction="#handleCancelBtnAction" stylesheets="@../listAppStyleSheet.css" text="Cancel">
                <font>
                   <Font name="Microsoft YaHei UI" size="12.0" />
                </font>
@@ -25,19 +26,49 @@
             <Label id="addTasklbl" layoutX="11.0" layoutY="25.0" stylesheets="@addTaskStyleSheet.css" text="Task Name:">
                <font>
                   <Font name="Microsoft YaHei UI" size="14.0" />
-               </font></Label>
-            <JFXTextField fx:id="tfTaskName" layoutX="110.0" layoutY="25.0" prefHeight="25.0" prefWidth="276.0" />
-            <Label id="addTasklbl" layoutX="14.0" layoutY="69.0" stylesheets="@addTaskStyleSheet.css" text="Due date:" />
-            <DatePicker fx:id="dpDueDate" layoutX="110.0" layoutY="69.0" prefHeight="25.0" prefWidth="276.0" />
-            <Label id="addTasklbl" layoutX="14.0" layoutY="110.0" stylesheets="@addTaskStyleSheet.css" text="Summary:" />
-            <JFXTextArea fx:id="taSummary" layoutX="110.0" layoutY="111.0" prefHeight="48.0" prefWidth="276.0" />
-            <Label id="addTasklbl" layoutX="16.0" layoutY="192.0" stylesheets="@addTaskStyleSheet.css" text="Category:" />
-            <JFXTextField fx:id="tfCategoryName" layoutX="110.0" layoutY="188.0" prefHeight="25.0" prefWidth="276.0" />
-            <Label id="addTasklbl" layoutX="17.0" layoutY="251.0" stylesheets="@addTaskStyleSheet.css" text="Reminder:" />
-            <DatePicker fx:id="dpReminder" layoutX="104.0" layoutY="251.0" prefHeight="25.0" prefWidth="276.0" />
-            <Label id="addTasklbl" layoutX="17.0" layoutY="305.0" stylesheets="@addTaskStyleSheet.css" text="Priority:" />
-            <JFXComboBox fx:id="cbPriority" layoutX="110.0" layoutY="299.0" prefHeight="25.0" prefWidth="276.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></Label>
+            <JFXTextField fx:id="tfTaskName" layoutX="110.0" layoutY="35.0" prefHeight="25.0" prefWidth="276.0" />
+            <Label id="addTasklbl" layoutX="14.0" layoutY="82.0" stylesheets="@addTaskStyleSheet.css" text="Due date:">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></Label>
+            <DatePicker fx:id="dpDueDate" layoutX="110.0" layoutY="92.0" prefHeight="25.0" prefWidth="276.0" />
+            <Label id="addTasklbl" layoutX="13.0" layoutY="134.0" stylesheets="@addTaskStyleSheet.css" text="Summary:">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></Label>
+            <JFXTextArea fx:id="taSummary" layoutX="110.0" layoutY="145.0" prefHeight="23.0" prefWidth="276.0" />
+            <Label id="addTasklbl" layoutX="14.0" layoutY="187.0" stylesheets="@addTaskStyleSheet.css" text="Category:">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></Label>
+            <JFXTextField fx:id="tfCategoryName" layoutX="110.0" layoutY="197.0" prefHeight="25.0" prefWidth="276.0" />
+            <Label id="addTasklbl" layoutX="16.0" layoutY="243.0" stylesheets="@addTaskStyleSheet.css" text="Reminder:">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></Label>
+            <DatePicker fx:id="dpReminder" layoutX="110.0" layoutY="253.0" prefHeight="25.0" prefWidth="276.0" />
+            <Label id="addTasklbl" layoutX="19.0" layoutY="304.0" stylesheets="@addTaskStyleSheet.css" text="Priority:">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="15.0" top="10.0" />
+               </padding></Label>
+            <JFXComboBox fx:id="cbPriority" layoutX="110.0" layoutY="314.0" prefHeight="25.0" prefWidth="276.0" promptText="Select priority" />
          </children>
       </AnchorPane>
+      <HBox layoutX="1.0" prefHeight="60.0" prefWidth="610.0">
+         <children>
+            <Label id="addTaskTitlelbl" stylesheets="@addTaskStyleSheet.css" text="Add a task...">
+               <font>
+                  <Font name="Microsoft YaHei UI" size="72.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

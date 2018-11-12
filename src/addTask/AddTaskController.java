@@ -8,6 +8,8 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,6 +74,13 @@ public class AddTaskController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        ObservableList<String> options = FXCollections.observableArrayList(
+                "High",
+                "Medium",
+                "Low"
+        );
+        cbPriority.getItems().addAll(options);
+        
     }    
     
 }
