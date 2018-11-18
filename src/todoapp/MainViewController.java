@@ -110,8 +110,9 @@ public class MainViewController implements Initializable {
                 }
                 
                 // instantiate GDA object to get category
-                gda = new CategoryDataAccessor("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/ListApp", "root", "Purple00");
-                
+                // gda = new CategoryDataAccessor("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/ListApp", "root", "Purple00");
+                 gda = new CategoryDataAccessor("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/ListApp", "root", "root");
+                 
                 // check if the task is associated to a category and color
                 //categoryColor = gda.getColor(Integer.parseInt(task.getGroup()));
                 
