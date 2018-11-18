@@ -1,0 +1,39 @@
+
+/*  color theme?
+#011A27 - dark navy
+#063852 - blueberry
+#f0810f - tangerine
+#e6df44 - daffodil
+*/
+
+#titleLbl{
+     -fx-text-fill: #011A27;
+     -fx-font-size: 96px;
+}
+
+.jfx-button {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #063852;
+    -fx-text-fill: white;
+}
+
+#addTaskButton {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #F0810F;
+    -fx-text-fill: white;
+    -fx-background-radius: 60px;
+    -fx-pref-height: 60px;
+    -fx-pref-width: 60px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.label {
+    -fx-text-fill: #011A27;
+    -fx-font-size: 24px;
+}
+
+
+
