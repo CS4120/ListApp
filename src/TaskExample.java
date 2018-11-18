@@ -29,8 +29,9 @@ public class TaskExample {
 
 		
 		//tsk.addTask("Task1", create2, due2, "A task I need to finish.", 1, remind2, 1, true);
-		//task.deleteTask("Task2");
-
+		//tsk.deleteTask("Task2");
+                String color = tsk.returnColorString("Finish Java Project");
+                System.out.println(color);
 	}
 
 }

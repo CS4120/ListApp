@@ -23,6 +23,20 @@ private Connection connection;
 			connection.close();
 		}
 	}
+        
+        public int getId(String taskName) throws SQLException{
+		// get Id of named list
+		int id = -1;
+		
+		Statement stmnt = connection.createStatement();
+		ResultSet rs = stmnt.executeQuery("SELECT Id FROM Task WHERE TaskName = '" + taskName + "'");
+		// Need to add in error handling for when the Id doesn't exist
+		while(rs.next()){
+			System.out.println("Id of " + taskName + " is " + rs.getInt("Id"));
+			id = rs.getInt("Id");
+		}
+		return id;
+	}
 	
 	public List<Category> getGroupList() throws SQLException {
 		try (
@@ -57,7 +71,7 @@ private Connection connection;
 	// delete list
         public void deleteCategory(String name) throws SQLException{
                 // get Id of named list
-                int id = -1;
+                int id = getId(name);
 
                 Statement stmnt = connection.createStatement();
                 ResultSet rs = stmnt.executeQuery("SELECT Id FROM Category WHERE GroupName = '" + name + "'");
@@ -118,4 +132,5 @@ private Connection connection;
                         System.out.println(filteredList.get(i).getCategoryName());
                 }
         }
+        
 }

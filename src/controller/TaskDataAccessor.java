@@ -207,7 +207,35 @@ public class TaskDataAccessor {
 			System.out.println("Update failed");
 	}
 	
-	
+        // select statements
+        public String returnTaskName(Task task){
+            return task.getName();
+        }
+        
+	// get foreign key values
+        public String returnColorString(String taskName) throws SQLException{
+            // get Id of named list
+            int id = getId(taskName);
+
+            Statement stmnt = connection.createStatement();
+            ResultSet rs = stmnt.executeQuery("SELECT Category FROM Task WHERE TaskName = '" + taskName + "'");
+            
+            int category = 0;
+            while (rs.next()){
+                category = rs.getInt("Category");
+                System.out.println("Category " + category);
+            }
+            
+            ResultSet rs2 = stmnt.executeQuery("SELECT ColorIndicator FROM Category c WHERE Id = " + category);
+            
+            String categoryString = "";
+            while (rs2.next()){
+                categoryString = rs2.getString("ColorIndicator");
+            }
+            return categoryString;
+        }
+        
+        
 	// filter by TaskName
 	
 	// filter by TaskCreateDate
