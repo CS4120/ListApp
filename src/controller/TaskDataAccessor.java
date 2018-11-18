@@ -78,10 +78,17 @@ public class TaskDataAccessor {
 	public void deleteTask(String name) throws SQLException{
 		int id = getId(name);
 		Statement stmnt = connection.createStatement();
+
+		ResultSet rs = stmnt.executeQuery("SELECT Id FROM Task WHERE TaskName = '" + name + "'");
+		// Need to add in error handling for when the Id doesn't exist
+		while(rs.next()){
+			System.out.println("Id of " + name + " is " + rs.getInt("Id"));
+			id = rs.getInt("Id");
+		}
 		int deleteSuccessful = stmnt.executeUpdate("DELETE FROM Task WHERE Id = " + id);
 		
 		// check if delete was successful
-		if (deleteSuccessful > -1)
+		if (deleteSuccessful > 0)
 			System.out.println("Delete was successful");
 		else 
 			System.out.println("Delete failed");
@@ -97,7 +104,7 @@ public class TaskDataAccessor {
 		
 		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET TaskName = '" + newName + "' WHERE Id = " + id);
 		// check if delete was successful
-		if (updateSuccessful > -1)
+		if (updateSuccessful > 0)
 			System.out.println("Update was successful");
 		else 
 			System.out.println("Update failed");
@@ -115,7 +122,7 @@ public class TaskDataAccessor {
 		
 		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET TaskDueDate = " + date + " WHERE Id = " + id);
 		// check if delete was successful
-		if (updateSuccessful > -1)
+		if (updateSuccessful > 0)
 			System.out.println("Update was successful");
 		else 
 			System.out.println("Update failed");		
@@ -131,7 +138,7 @@ public class TaskDataAccessor {
 		
 		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET TaskDueDate = '" + summary + "' WHERE Id = " + id);
 		// check if delete was successful
-		if (updateSuccessful > -1)
+		if (updateSuccessful > 0)
 			System.out.println("Update was successful");
 		else 
 			System.out.println("Update failed");		
@@ -147,7 +154,7 @@ public class TaskDataAccessor {
 		
 		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET Category = " + category + " WHERE Id = " + id);
 		// check if delete was successful
-		if (updateSuccessful > -1)
+		if (updateSuccessful > 0)
 			System.out.println("Update was successful");
 		else 
 			System.out.println("Update failed");		
@@ -163,7 +170,7 @@ public class TaskDataAccessor {
 		
 		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET Priority = " + priority + " WHERE Id = " + id);
 		// check if delete was successful
-		if (updateSuccessful > -1)
+		if (updateSuccessful > 0)
 			System.out.println("Update was successful");
 		else 
 			System.out.println("Update failed");		
@@ -179,7 +186,7 @@ public class TaskDataAccessor {
 		
 		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET Reminder = " + remind + " WHERE Id = " + id);
 		// check if delete was successful
-		if (updateSuccessful > -1)
+		if (updateSuccessful > 0)
 			System.out.println("Update was successful");
 		else 
 			System.out.println("Update failed");		
@@ -194,7 +201,7 @@ public class TaskDataAccessor {
 		
 		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET Status = " + stat + " WHERE Id = " + id);
 		// check if delete was successful
-		if (updateSuccessful > -1)
+		if (updateSuccessful > 0)
 			System.out.println("Update was successful");
 		else 
 			System.out.println("Update failed");
