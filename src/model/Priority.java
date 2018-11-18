@@ -14,7 +14,7 @@ public class Priority {
 		this.priorityType = priName;
 	}
 	
-	public String getPriority(){
+	public String getPriorityName(){
 		return this.priorityType;
 	}
 }
