@@ -9,8 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
-import controller.TaskDataAccessor;
-import controller.GroupDataAccessor;
+import controller.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -39,7 +38,7 @@ public class MainViewController implements Initializable {
     private List<Task> listOfTasks;
     private List<Task> cbList;
     private String categoryColor;
-    private GroupDataAccessor gda;
+    private CategoryDataAccessor gda;
     private Color c;
 
     
@@ -111,10 +110,10 @@ public class MainViewController implements Initializable {
                 }
                 
                 // instantiate GDA object to get category
-                gda = new GroupDataAccessor("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/ListApp", "root", "Purple00");
+                gda = new CategoryDataAccessor("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/ListApp", "root", "Purple00");
                 
                 // check if the task is associated to a category and color
-                categoryColor = gda.getGroupColor(Integer.parseInt(task.getGroup()));
+                //categoryColor = gda.getColor(Integer.parseInt(task.getGroup()));
                 
                 // set task text to category color
                 taskCheckBox.setTextFill(findColor(categoryColor));
@@ -123,13 +122,13 @@ public class MainViewController implements Initializable {
                 taskCheckBox.setOnAction(e -> {
                     try {
                         task.setStatus(task.getStatus() == 0 ? 1 : 0);
-                        tda.updateStatus(task);
+                        tda.updateStatus(task.getName(),task.getStatus()); //this has to be an integer
                     } 
                     catch (SQLException ex) {
                         Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
                     } 
                     
-                    
+         
                 });
                 taskListVBox.getChildren().add(taskCheckBox);
             }

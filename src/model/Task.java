@@ -3,21 +3,19 @@ package model;
 import java.util.Date;
 
 public class Task {
-        private int id;
 	private String taskName;
 	private Date taskCreateDate;
 	private Date taskDueDate;
 	private String summary;
-	private String group ; // how do you deal with foreign keys? Inherit a group class?
+	private int group ; // how do you deal with foreign keys? Inherit a group class?
 	private Date reminder;
 	private int priority; // another foreign key
 	private int status;
 	
 	public Task(){}
 	
-	public Task(int id, String name, Date create, Date due, String sum, String grp, Date remind, int pri, int stat){
-                this.id = id;
-                this.taskName = name;
+	public Task(String name, Date create, Date due, String sum, int grp, Date remind, int pri, int stat){
+		this.taskName = name;
 		this.taskCreateDate = create;
 		this.taskDueDate = due;
 		this.summary = sum;
@@ -28,14 +26,6 @@ public class Task {
 	}
 	
 	// Individual getters and setters
-        public void setId(int id){
-            this.id = id;
-        }
-        
-        public int getId(){
-            return this.id;
-        }
-        
 	public void setName(String name){
 		this.taskName = name;
 	}
@@ -68,11 +58,11 @@ public class Task {
 		return this.summary;
 	}
 	
-	public void setGroup(String grp){
+	public void setGroup(int grp){
 		this.group = grp;
 	}
 	
-	public String getGroup(){
+	public int getGroup(){
 		return this.group;
 	}
 	
@@ -93,11 +83,11 @@ public class Task {
 	}
 	
 	public void setStatus(int stat){
-            this.status = status;
-        }
+		this.status = stat;
+	}
 	
 	public int getStatus(){
-            return this.status;
+		return this.status;
 	}
 	
 	
