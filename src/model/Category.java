@@ -14,6 +14,12 @@ public class Category {
 		this.colorIndicator = color;
 		this.priority = pri;
 	}
+        
+        public Category(String name, String color, int pri){
+		this.groupName = name;
+		this.colorIndicator = color;
+		this.priority = pri;
+	}
 	
 	// getters and setters
         public void setId(int Id) {

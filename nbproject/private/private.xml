@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Shaina/Documents/GitHub/ListApp/src/model/Category.java</file>
-            <file>file:/Users/Shaina/Documents/GitHub/ListApp/src/controller/TaskDataAccessor.java</file>
-            <file>file:/Users/Shaina/Documents/GitHub/ListApp/src/todoapp/MainViewController.java</file>
-            <file>file:/Users/Shaina/Documents/GitHub/ListApp/src/addTask/AddTaskController.java</file>
-            <file>file:/Users/Shaina/Documents/GitHub/ListApp/src/todoapp/MainToDo.java</file>
-            <file>file:/Users/Shaina/Documents/GitHub/ListApp/src/controller/CategoryDataAccessor.java</file>
-            <file>file:/Users/Shaina/Documents/GitHub/ListApp/src/model/Task.java</file>
+            <file>file:/C:/Users/Brian/Documents/GitHub/ListApp/src/controller/TaskDataAccessor.java</file>
+            <file>file:/C:/Users/Brian/Documents/GitHub/ListApp/src/model/Category.java</file>
+            <file>file:/C:/Users/Brian/Documents/GitHub/ListApp/src/controller/CategoryDataAccessor.java</file>
         </group>
     </open-files>
 </project-private>
