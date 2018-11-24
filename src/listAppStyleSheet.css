@@ -12,7 +12,7 @@
 }
 
 .jfx-button {
-    -jfx-button-type: RAISED;
+    -jfx-button-type: FLAT;
     -fx-background-color: #063852;
     -fx-text-fill: white;
 }
@@ -33,6 +33,11 @@
 .label {
     -fx-text-fill: #011A27;
     -fx-font-size: 24px;
+}
+
+#taskTextArea {
+    -fx-text-fill: #063852;
+    -fx-font: 36px;
 }
 
 

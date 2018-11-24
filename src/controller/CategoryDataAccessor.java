@@ -6,6 +6,7 @@ import model.ToDoList;
 import java.sql.*;
 import java.util.List ;
 import java.util.ArrayList ;
+import model.Task;
 
 public class CategoryDataAccessor {
 private Connection connection;
@@ -126,6 +127,22 @@ private Connection connection;
                         return categoryList;
                 }
         }
+        
+        // filter by category name
+          public List<Category> filterGroupName() throws SQLException {
+		try (
+				Statement stmnt = connection.createStatement();
+				ResultSet rs = stmnt.executeQuery("select GroupName from Category");
+		){
+			List<Category> groupList = new ArrayList<>();
+			while (rs.next()) {
+				String groupName = rs.getString("GroupName");
+				Category category = new Category();
+				groupList.add(category);
+			}
+			return groupList;
+		}
+	}
 		
         public void displayFilteredCategoryName(List<Category> filteredList){
                 for (int i = 0; i < filteredList.size(); i++){

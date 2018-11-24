@@ -3,9 +3,11 @@ import model.Task;
 import model.ToDoList;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List ;
 import java.util.ArrayList ;
+import model.Category;
 
 
 public class TaskDataAccessor {
@@ -28,7 +30,7 @@ public class TaskDataAccessor {
 	public List<Task> getTaskList() throws SQLException {
 		try (
 				Statement stmnt = connection.createStatement();
-				ResultSet rs = stmnt.executeQuery("select * from Task");
+				ResultSet rs = stmnt.executeQuery("select * from Task t inner join Category c on c.id = t.category");
 		){
 			List<Task> taskList = new ArrayList<>();
 			while (rs.next()) {
@@ -37,16 +39,33 @@ public class TaskDataAccessor {
 				Date taskDue = rs.getDate("TaskDueDate");
 				String summary = rs.getString("Summary");
 				int group = rs.getInt("Category");
+                                String categoryName = rs.getString("GroupName");
 				Date reminder = rs.getDate("Reminder");
 				int priority = rs.getInt("Priority");
 				int status = rs.getInt("Status");
-				Task task = new Task(taskName, taskCreate, taskDue, summary, group, reminder, priority, status);
+				Task task = new Task(taskName, taskCreate, taskDue, summary, group, reminder, priority, status, categoryName);
 				taskList.add(task);
 			}
 			return taskList;
 		}
 	}
 	
+        public List<Category> getGroupList() throws SQLException {
+		try (
+				Statement stmnt = connection.createStatement();
+				ResultSet rs = stmnt.executeQuery("select * from Category");
+		){
+			List<Category> groupList = new ArrayList<>();
+			while (rs.next()) {
+				String groupName = rs.getString("GroupName");
+				String groupColor = rs.getString("ColorIndicator");
+				int groupPrior = rs.getInt("Priority");
+				Category group = new Category(groupName, groupColor, groupPrior);
+				groupList.add(group);
+			}
+			return groupList;
+		}
+	}
 	// add Task
 	public void addTask(String name, Date create, Date due, String sum, int grp, Date remind, int pri, int stat) throws SQLException{
 		Task newTask = new Task();
@@ -54,10 +73,12 @@ public class TaskDataAccessor {
 		Statement stmnt = connection.createStatement();
 		int insertSuccessful = stmnt.executeUpdate("INSERT INTO Task (TaskName, TaskCreateDate, TaskDueDate, Summary, Category, Reminder, Priority, Status) " + 
 				"VALUES ( '" + name + "', '" + create + "', '" + due + "', '" + sum + "', '" + grp + "', '" + remind + "', '" + pri + "', '" + stat + "')");
-		if(insertSuccessful == 1)
+                
+                if(insertSuccessful == 1)
 			System.out.println("Insert was successful");
 		else 
 			System.out.println("Insert failed");
+                
 	}
 		
 	public int getId(String taskName) throws SQLException{
@@ -86,7 +107,9 @@ public class TaskDataAccessor {
 			id = rs.getInt("Id");
 		}
 		int deleteSuccessful = stmnt.executeUpdate("DELETE FROM Task WHERE Id = " + id);
-		
+                
+//                rs.refreshRow();
+                
 		// check if delete was successful
 		if (deleteSuccessful > -1)
 			System.out.println("Delete was successful");
@@ -103,6 +126,7 @@ public class TaskDataAccessor {
 		ResultSet rs = stmnt.executeQuery("SELECT Id FROM Task WHERE TaskName = '" + name + "'");
 		
 		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET TaskName = '" + newName + "' WHERE Id = " + id);
+                
 		// check if delete was successful
 		if (updateSuccessful > -1)
 			System.out.println("Update was successful");
@@ -119,9 +143,13 @@ public class TaskDataAccessor {
 		
 		Statement stmnt = connection.createStatement();
 		ResultSet rs = stmnt.executeQuery("SELECT Id FROM Task WHERE TaskName = '" + name + "'");
+                
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String sqlTimestamp = sdf.format(date);
 		
-		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET TaskDueDate = " + date + " WHERE Id = " + id);
-		// check if delete was successful
+		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET TaskDueDate = \'" + Timestamp.valueOf(sqlTimestamp) + "\' WHERE Id = " + id);
+                
+                // check if update was successful
 		if (updateSuccessful > -1)
 			System.out.println("Update was successful");
 		else 
@@ -137,7 +165,8 @@ public class TaskDataAccessor {
 		ResultSet rs = stmnt.executeQuery("SELECT Id FROM Task WHERE TaskName = '" + name + "'");
 		
 		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET TaskDueDate = '" + summary + "' WHERE Id = " + id);
-		// check if delete was successful
+                
+                // check if update was successful
 		if (updateSuccessful > -1)
 			System.out.println("Update was successful");
 		else 
@@ -153,7 +182,8 @@ public class TaskDataAccessor {
 		ResultSet rs = stmnt.executeQuery("SELECT Id FROM Task WHERE TaskName = '" + name + "'");
 		
 		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET Category = " + category + " WHERE Id = " + id);
-		// check if delete was successful
+
+		// check if update was successful
 		if (updateSuccessful > -1)
 			System.out.println("Update was successful");
 		else 
@@ -169,7 +199,8 @@ public class TaskDataAccessor {
 		ResultSet rs = stmnt.executeQuery("SELECT Id FROM Task WHERE TaskName = '" + name + "'");
 		
 		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET Priority = " + priority + " WHERE Id = " + id);
-		// check if delete was successful
+
+		// check if update was successful
 		if (updateSuccessful > -1)
 			System.out.println("Update was successful");
 		else 
@@ -185,7 +216,8 @@ public class TaskDataAccessor {
 		ResultSet rs = stmnt.executeQuery("SELECT Id FROM Task WHERE TaskName = '" + name + "'");
 		
 		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET Reminder = " + remind + " WHERE Id = " + id);
-		// check if delete was successful
+
+		// check if update was successful
 		if (updateSuccessful > -1)
 			System.out.println("Update was successful");
 		else 
@@ -200,7 +232,8 @@ public class TaskDataAccessor {
 		ResultSet rs = stmnt.executeQuery("SELECT Id FROM Task WHERE TaskName = '" + name + "'");
 		
 		int updateSuccessful = stmnt.executeUpdate("UPDATE Task SET Status = " + stat + " WHERE Id = " + id);
-		// check if delete was successful
+
+		// check if update was successful
 		if (updateSuccessful > -1)
 			System.out.println("Update was successful");
 		else 
@@ -219,6 +252,7 @@ public class TaskDataAccessor {
 
             Statement stmnt = connection.createStatement();
             ResultSet rs = stmnt.executeQuery("SELECT Category FROM Task WHERE TaskName = '" + taskName + "'");
+            //select colorindicator from category inner join task on task.category = category.id where task.taskname = :taskname
             
             int category = 0;
             while (rs.next()){
@@ -234,20 +268,58 @@ public class TaskDataAccessor {
             }
             return categoryString;
         }
-        
-        
-	// filter by TaskName
 	
 	// filter by TaskCreateDate
 	
 	// filter by TaskDueDate
+        public List<Task> filterTaskDueDate(int numDays) throws SQLException {
+		try (
+				Statement stmnt = connection.createStatement();
+				ResultSet rs = stmnt.executeQuery("select * from Task t inner join Category c on c.id = t.category where t.TaskDueDate <= DATE_ADD(current_date(), interval " + numDays + " day)");
+		){
+			List<Task> taskList = new ArrayList<>();
+			while (rs.next()) {
+				String taskName = rs.getString("TaskName");
+				Date taskCreate = rs.getDate("TaskCreateDate");
+				Date taskDue = rs.getDate("TaskDueDate");
+				String summary = rs.getString("Summary");
+				int group = rs.getInt("Category");
+                                String categoryName = rs.getString("GroupName");
+				Date reminder = rs.getDate("Reminder");
+				int priority = rs.getInt("Priority");
+				int status = rs.getInt("Status");
+				Task task = new Task(taskName, taskCreate, taskDue, summary, group, reminder, priority, status, categoryName);
+				taskList.add(task);
+			}
+			return taskList;
+		}
+	}
 	
 	// filter by Group
 	
-	// filter by Priority
-	
 	// filter by Status
-	
-	// display filtered
+         public List<Task> filterCompleted() throws SQLException {
+		try (
+				Statement stmnt = connection.createStatement();
+				ResultSet rs = stmnt.executeQuery("select * from Task t inner join Category c on c.id = t.category where t.Status = 1");
+		){
+			List<Task> taskList = new ArrayList<>();
+			while (rs.next()) {
+				String taskName = rs.getString("TaskName");
+				Date taskCreate = rs.getDate("TaskCreateDate");
+				Date taskDue = rs.getDate("TaskDueDate");
+				String summary = rs.getString("Summary");
+				int group = rs.getInt("Category");
+                                String categoryName = rs.getString("GroupName");
+				Date reminder = rs.getDate("Reminder");
+				int priority = rs.getInt("Priority");
+				int status = rs.getInt("Status");
+				Task task = new Task(taskName, taskCreate, taskDue, summary, group, reminder, priority, status, categoryName);
+				taskList.add(task);
+			}
+			return taskList;
+		}
+	}
+
 	
 }
