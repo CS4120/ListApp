@@ -6,7 +6,6 @@ import model.ToDoList;
 import java.sql.*;
 import java.util.List ;
 import java.util.ArrayList ;
-import model.Task;
 
 public class CategoryDataAccessor {
 private Connection connection;
@@ -46,10 +45,11 @@ private Connection connection;
 		){
 			List<Category> groupList = new ArrayList<>();
 			while (rs.next()) {
+                                int id = rs.getInt("Id");
 				String name = rs.getString("GroupName");
 				String color = rs.getString("ColorIndicator");
 				int priority = rs.getInt("Priority");
-				Category group = new Category(name, color, priority);
+				Category group = new Category(id, name, color, priority);
 				groupList.add(group);
 			}
 			return groupList;
@@ -98,11 +98,12 @@ private Connection connection;
                 ) {
                         List<Category> filteredCategory = new ArrayList<>();
                         while (rs.next()){
+                                int id = rs.getInt("Id");
                                 String name = rs.getString("GroupName");
                                 //System.out.println("name: " + name);
                                 String color = rs.getString("ColorIndicator");
                                 int pri = rs.getInt("Priority");
-                                Category cat = new Category(name, color, pri);
+                                Category cat = new Category(id, name, color, pri);
                                 filteredCategory.add(cat);
                         }
                         return filteredCategory;
@@ -117,32 +118,17 @@ private Connection connection;
                 ) {
                         List<Category> categoryList = new ArrayList<>();
                         while (rs.next()){
+                                int id = rs.getInt("Id");
                                 String name = rs.getString("GroupName");
                                 //System.out.println("name: " + name);
                                 String color = rs.getString("ColorIndicator");
                                 int pri = rs.getInt("Priority");
-                                Category category = new Category(name, color, pri);
+                                Category category = new Category(id, name, color, pri);
                                 categoryList.add(category);
                         }
                         return categoryList;
                 }
         }
-        
-        // filter by category name
-          public List<Category> filterGroupName() throws SQLException {
-		try (
-				Statement stmnt = connection.createStatement();
-				ResultSet rs = stmnt.executeQuery("select GroupName from Category");
-		){
-			List<Category> groupList = new ArrayList<>();
-			while (rs.next()) {
-				String groupName = rs.getString("GroupName");
-				Category category = new Category();
-				groupList.add(category);
-			}
-			return groupList;
-		}
-	}
 		
         public void displayFilteredCategoryName(List<Category> filteredList){
                 for (int i = 0; i < filteredList.size(); i++){
