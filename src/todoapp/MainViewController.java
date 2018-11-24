@@ -17,17 +17,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -36,7 +30,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -46,7 +39,7 @@ import javafx.stage.Stage;
 import model.Task;
 
 public class MainViewController implements Initializable {
-    
+
     private static enum Filter {
         AllTask,
         Today,
@@ -54,24 +47,24 @@ public class MainViewController implements Initializable {
         Month,
         Complete
     }
-    
+
     private static enum SortType {
         Date,
         Group,
         Priority
     }
-    
+
     private static Filter currentFilter;
     private static SortType currentSort;
-    
+
     private final int HOURS_IN_DAY = 24;
     private final int CHECKCOL = 0;
     private final int SNZCOL = 1;
     private final int DELCOL = 2;
-    private final int UPCOL = 3;
+//    private final int UPCOL = 3;  // update task???
     private final int COMPLETE = 1;
     private final int INCOMPLETE = 0;
-   
+
     private List<Task> listOfTasks;
     private List<Task> cbList;
     private String categoryColor;
@@ -97,7 +90,7 @@ public class MainViewController implements Initializable {
         } else if (sortComboBox.getValue() == "Priority") {
             currentSort = SortType.Priority;
         }
-        
+
         refresh(currentFilter, currentSort);
     }
 
@@ -107,29 +100,12 @@ public class MainViewController implements Initializable {
     @FXML
     private void taskComboAction(ActionEvent event) {
         if (null != selectTaskcb.getValue()) {
-            for(Task task : listOfTasks) {
+            for (Task task : listOfTasks) {
                 if (selectTaskcb.getValue().equals(task.getName())) {
                     populTaskTextArea(task);
                 }
             }
         }
-    }
-
-    @FXML
-    private JFXComboBox groupComboBox;
-    
-    @FXML
-    private void grpComboBoxAction(ActionEvent event){
-        // get existing groups
-        
-        // add groups to groupComboBox
-        for (Task task : listOfTasks){
-            
-        }
-        
-        // groupComboBox.getValue().equals(task.getGroup())
-        
-        // display all tasks for the selected group
     }
 
     @FXML
@@ -182,7 +158,6 @@ public class MainViewController implements Initializable {
         currentFilter = Filter.Week;
         refresh(currentFilter, currentSort);
     }
-    
 
     @FXML
     private void handleMonthFilter(MouseEvent event) throws SQLException, IOException {
@@ -204,14 +179,14 @@ public class MainViewController implements Initializable {
             tda = new TaskDataAccessor("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/ListApp", "root", "Purple00");
             currentFilter = Filter.AllTask;
             currentSort = SortType.Date;
-            
+
             refresh(currentFilter, currentSort);
         } catch (SQLException ex) {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         // add sortOptions to sort combo box
         sortComboBox.getItems().addAll("Date", "Group", "Priority");
     }
@@ -253,7 +228,7 @@ public class MainViewController implements Initializable {
                 taskCheckBox.setOnAction(e -> {
                     try {
                         task.setStatus(task.getStatus() == INCOMPLETE ? COMPLETE : INCOMPLETE);
-                        tda.updateStatus(task.getName(), task.getStatus()); 
+                        tda.updateStatus(task.getName(), task.getStatus());
                         snooze.setDisable(checkForSnooze(task));
                     } catch (SQLException ex) {
                         Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -270,7 +245,7 @@ public class MainViewController implements Initializable {
                         Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
-                
+
                 // delete button event listener
                 delete.setOnAction(e -> {
                     try {
@@ -280,13 +255,11 @@ public class MainViewController implements Initializable {
                         Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
-                
+
                 // update button event listener
-                
-                
                 // disable the Snooze button when the task.getTaskDueDate == null or task.getTaskDueDate > upCurrDateOneDay()
                 snooze.setDisable(checkForSnooze(task));
-                   
+
                 // add tasks to select Task combo box to view details in the right pane text area
                 selectTaskcb.getItems().add(task.getName());
                 grid.add(taskCheckBox, CHECKCOL, rowCount);
@@ -294,7 +267,7 @@ public class MainViewController implements Initializable {
                 grid.add(delete, DELCOL, rowCount);
                 rowCount++;
             }
-            
+
             taskListVBox.getChildren().add(grid);
 
         } catch (SQLException ex) {
@@ -327,39 +300,33 @@ public class MainViewController implements Initializable {
         String remind = convertDateToString(task.getReminder());
         String status = convertStatus(task.getStatus());
         String priority = Integer.toString(task.getPriority());
-        
-        if (dueDate == null){
+
+        if (dueDate == null) {
             dueDate = "\nDUE DATE:  No Due Date Assigned";
-        }
-        else {
+        } else {
             dueDate = ("\nDUE DATE:  " + dueDate);
         }
-        
-        
-        if (category == null){
-            category = ("\nCATEGORY:  No Category Assigned");  
-        }
-        else {
+
+        if (category == null) {
+            category = ("\nCATEGORY:  No Category Assigned");
+        } else {
             category = ("\nCATEGORY:  " + category);
         }
-        
+
         if (remind == null) {
             remind = ("\nREMINDER:  No Reminder Assigned");
+        } else {
+            remind = ("\nREMINDER:  " + remind);
         }
-        else {
-            remind = ("\nREMINDER:  " + remind);            
-        }
-        
-        if (priority.equals("1")){
+
+        if (priority.equals("1")) {
             priority = ("\nPRIORITY:  High");
-        }
-        else if (priority.equals("2")){
+        } else if (priority.equals("2")) {
             priority = ("\nPRIORITY:  Medium");
-        }
-        else {
+        } else {
             priority = ("\nPRIORITY:  Low");
         }
-        
+
         sb.append("\nNAME:  " + task.getName() + "\n");
         sb.append("\nSUMMARY:  " + task.getSummary() + "\n");
         sb.append(category + "\n");
@@ -370,64 +337,45 @@ public class MainViewController implements Initializable {
 
         taskTextArea.setText(sb.toString());
     }
-    
+
     private Date upCurrDateOneDay() {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         cal.add(Calendar.HOUR_OF_DAY, HOURS_IN_DAY);
-        
+
         return cal.getTime();
     }
-    
-    private String convertDateToString(Date indate){
+
+    private String convertDateToString(Date indate) {
         String dateString = null;
         SimpleDateFormat sdfr = new SimpleDateFormat("MM/dd/yyyy");
-        
-        if(!(null == indate)) {
+
+        if (!(null == indate)) {
             try {
                 dateString = sdfr.format(indate);
             } catch (Exception ex) {
                 Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-            }            
+            }
         }
 
         return dateString;
     }
-    
-    private String convertStatus(int status){
+
+    private String convertStatus(int status) {
         String stat;
-        if (status == INCOMPLETE){
+        if (status == INCOMPLETE) {
             stat = "Incomplete";
-        }
-        else {
+        } else {
             stat = "Complete";
         }
         return stat;
     }
-    
-    private GridPane removeRow(int rowCnt, GridPane grid){
-        Set<Node> deleteNodes = new HashSet<>();
-        for (Node child : grid.getChildren()){
-            // get index from child
-            Integer rowIndex = GridPane.getRowIndex(child);
-            
-            // handle null values for index=0
-            int r = rowIndex == null ? 0 : rowIndex;
-            
-            if (r == rowCnt){
-                // collect matching rows for deletion
-                deleteNodes.add(child);
-            }
-        }
-        grid.getChildren().removeAll(deleteNodes);
-        return grid;
-    }
-    
-    private boolean checkForSnooze(Task task){
+
+    private boolean checkForSnooze(Task task) {
         return task.getTaskDueDate() == null || task.getStatus() == COMPLETE || task.getTaskDueDate().after(upCurrDateOneDay());
-                
+
     }
-    
+
     private void refresh(Filter filter, SortType sort) throws SQLException {
         switch (filter) {
             case AllTask:
@@ -449,8 +397,8 @@ public class MainViewController implements Initializable {
                 listOfTasks = tda.getTaskList();
                 break;
         }
-        
-        switch(sort) {
+
+        switch (sort) {
             case Date:
                 Collections.sort(listOfTasks, Task.TaskDateAscComparator);
                 break;
@@ -461,7 +409,7 @@ public class MainViewController implements Initializable {
                 Collections.sort(listOfTasks, Task.TaskPriorAscComparator);
                 break;
         }
-          
+
         displayListOfTasks(listOfTasks);
     }
 

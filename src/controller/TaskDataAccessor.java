@@ -108,8 +108,6 @@ public class TaskDataAccessor {
 		}
 		int deleteSuccessful = stmnt.executeUpdate("DELETE FROM Task WHERE Id = " + id);
                 
-//                rs.refreshRow();
-                
 		// check if delete was successful
 		if (deleteSuccessful > -1)
 			System.out.println("Delete was successful");
