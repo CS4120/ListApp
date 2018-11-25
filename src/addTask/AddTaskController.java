@@ -124,15 +124,51 @@ public class AddTaskController implements Initializable {
             Logger.getLogger(AddTaskController.class.getName()).log(Level.SEVERE, null, ex);
         } 
         
-        for(int i = 0; i < groups.size(); i++) {
-            if(cbGroupName.getValue().toString().equals(groups.get(i).getCategoryName())) {
-                groupId = groups.get(i).getId();
+            if (null == cbGroupName.getValue()){
+                groupId = 7;
             }
-        }
+            
+            else { 
+                for(int i = 0; i < groups.size(); i++) {
+                    if (cbGroupName.getValue().toString().equals(groups.get(i).getCategoryName())) {
+                        groupId = groups.get(i).getId();
+                    }
+                }
+            }
         
         try { //Connection to database
             TaskDataAccessor tda = new TaskDataAccessor("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/ListApp", "root", "Purple00");
-            tda.addTask(tfTaskName.getText(), java.sql.Date.valueOf(LocalDate.now()), java.sql.Date.valueOf(dpDueDate.getValue()), taSummary.getText(), groupId, java.sql.Date.valueOf(dpReminder.getValue()), 0, 0);
+            int priority;
+            if (null == cbPriority.getValue()){
+                priority = 0;
+            }
+                    
+            else if(cbPriority.getValue().equals("High")){
+                priority = 1;
+            }
+            else if (cbPriority.getValue().equals("Medium")){
+                priority = 2;
+            }
+            else if (cbPriority.getValue().equals("Low")){
+                priority = 3;
+            }
+            
+            else {
+                priority = 0;
+            }
+            
+            if (null == dpReminder.getValue() && null != dpDueDate.getValue()){
+                tda.addTask(tfTaskName.getText(), java.sql.Date.valueOf(LocalDate.now()), java.sql.Date.valueOf(dpDueDate.getValue()), taSummary.getText(), groupId, priority, 0);
+            }
+            else if (null == dpReminder.getValue() && null == dpDueDate.getValue()){
+                 tda.addTask(tfTaskName.getText(), java.sql.Date.valueOf(LocalDate.now()), taSummary.getText(), groupId, priority, 0);
+            }
+            else if (null != dpReminder.getValue() && null == dpDueDate.getValue()){
+                tda.addTask(tfTaskName.getText(), java.sql.Date.valueOf(LocalDate.now()), taSummary.getText(), groupId, java.sql.Date.valueOf(dpReminder.getValue()),priority, 0);
+            }
+            else
+            tda.addTask(tfTaskName.getText(), java.sql.Date.valueOf(LocalDate.now()), java.sql.Date.valueOf(dpDueDate.getValue()), taSummary.getText(), groupId, java.sql.Date.valueOf(dpReminder.getValue()), priority, 0);
+            
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AddTaskController.class.getName()).log(Level.SEVERE, null, ex);
         }

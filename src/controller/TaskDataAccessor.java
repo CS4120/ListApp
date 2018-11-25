@@ -80,6 +80,49 @@ public class TaskDataAccessor {
 			System.out.println("Insert failed");
                 
 	}
+        
+        // add task with no reminder
+        public void addTask(String name, Date create, Date due, String sum, int grp, int pri, int stat) throws SQLException{
+            Task newTask = new Task();
+            
+            Statement stmnt = connection.createStatement();
+            int insertSuccessful = stmnt.executeUpdate("INSERT INTO Task (TaskName, TaskCreateDate, TaskDueDate, Summary, Category, Reminder, Priority, Status) " + 
+                            "VALUES ( '" + name + "', '" + create + "', '" + due + "', '" + sum + "', '" + grp + "', null, '" + pri + "', '" + stat + "')");
+
+            if(insertSuccessful == 1)
+                    System.out.println("Insert was successful");
+            else 
+                    System.out.println("Insert failed");
+        }
+        
+        // add task with no due date
+        public void addTask(String name, Date create, String sum, int grp, Date remind, int pri, int stat) throws SQLException{
+            Task newTask = new Task();
+            
+            Statement stmnt = connection.createStatement();
+            int insertSuccessful = stmnt.executeUpdate("INSERT INTO Task (TaskName, TaskCreateDate, TaskDueDate, Summary, Category, Reminder, Priority, Status) " + 
+                            "VALUES ( '" + name + "', '" + create + "', null, '" + sum + "', '" + grp + "', '" + remind +"', '" + pri + "', '" + stat + "')");
+
+            if(insertSuccessful == 1)
+                    System.out.println("Insert was successful");
+            else 
+                    System.out.println("Insert failed");
+        }
+        
+        // add task with no reminder and due date
+        public void addTask(String name, Date create, String sum, int grp, int pri, int stat) throws SQLException{
+            Task newTask = new Task();
+            
+            Statement stmnt = connection.createStatement();
+            int insertSuccessful = stmnt.executeUpdate("INSERT INTO Task (TaskName, TaskCreateDate, TaskDueDate, Summary, Category, Reminder, Priority, Status) " + 
+                            "VALUES ( '" + name + "', '" + create + "', null, '" + sum + "', '" + grp + "', null, '" + pri + "', '" + stat + "')");
+
+            if(insertSuccessful == 1)
+                    System.out.println("Insert was successful");
+            else 
+                    System.out.println("Insert failed");
+        }
+        
 		
 	public int getId(String taskName) throws SQLException{
 		// get Id of named list

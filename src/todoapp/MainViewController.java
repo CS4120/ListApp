@@ -222,7 +222,7 @@ public class MainViewController implements Initializable {
                 System.out.println(categoryColor);
 
                 // set task text to category color
-                taskCheckBox.setTextFill(findColor(categoryColor));
+                taskCheckBox.setTextFill(Color.web(categoryColor));
 
                 // checkbox event
                 taskCheckBox.setOnAction(e -> {
